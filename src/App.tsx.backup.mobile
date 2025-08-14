@@ -280,20 +280,6 @@ function App() {
   const [copiedArticleId, setCopiedArticleId] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Manage body scroll lock when mobile sidebar is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.classList.add("sidebar-open");
-    } else {
-      document.body.classList.remove("sidebar-open");
-    }
-    
-    // Cleanup on unmount
-    return () => {
-      document.body.classList.remove("sidebar-open");
-    };
-  }, [isMobileMenuOpen]);
-
   // Credit system state
   const [accessKey, setAccessKey] = useState("");
   const [creditInfo, setCreditInfo] = useState<CreditInfo | null>(null);
@@ -995,10 +981,9 @@ function App() {
                   <p className="plan-description">Perfect for getting started and testing the waters.</p>
                   <div className="plan-price">$5.99</div>
                   <ul className="plan-features">
-                    <li>60 Keyword Credits</li>
+                    <li>25 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple formats: WordPress, Shopify, Ghost, Medium, HTML</li>
-                    <li>Community support</li>
+                    <li>WordPress ready format</li>
                   </ul>
                   <button 
                     className="plan-button"
@@ -1016,14 +1001,13 @@ function App() {
                   <div className="plan-price">$49.99</div>
                   <div style={{ background: 'var(--success-color)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: '600', marginBottom: '20px', display: 'inline-block' }}>
                     Most Popular
-                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Most Popular Choice\                  </div>
+                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 29% vs Basic per credit\                  </div>
                   </div>
                   <ul className="plan-features">
-                    <li>500 Keyword Credits</li>
+                    <li>300 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple formats: WordPress, Shopify, Ghost, Medium, HTML</li>
-                    <li>Email support + Priority response</li>
-                    <li>White-glove onboarding</li>
+                    <li>WordPress ready format</li>
+                    <li>Priority support</li>
                   </ul>
                   <button 
                     className="plan-button"
@@ -1041,14 +1025,13 @@ function App() {
                   <div className="plan-price">$99.99</div>
                   <div style={{ background: 'var(--success-color)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: '600', marginBottom: '20px', display: 'inline-block' }}>
                     Best Value
-                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 17% per credit + Priority\                  </div>
+                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 46% vs Basic per credit\                  </div>
                   </div>
                   <ul className="plan-features">
-                    <li>1200 Keyword Credits</li>
+                    <li>750 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple formats: WordPress, Shopify, Ghost, Medium, HTML</li>
-                    <li>Email support + Priority response</li>
-                    <li>White-glove onboarding</li>
+                    <li>WordPress ready format</li>
+                    <li>Priority support</li>
                     <li>Custom integrations</li>
                   </ul>
                   <button 
