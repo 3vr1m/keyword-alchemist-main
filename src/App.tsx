@@ -1002,7 +1002,7 @@ function App() {
                   <p className="plan-description">Perfect for getting started and testing the waters.</p>
                   <div className="plan-price">$5.99</div>
                   <ul className="plan-features">
-                    <li>25 Keyword Credits</li>
+                    <li>50 Keyword Credits</li>
                     <li>High-quality AI generation</li>
                     <li>WordPress ready format</li>
                   </ul>
@@ -1022,14 +1022,14 @@ function App() {
                   <div className="plan-price">$49.99</div>
                   <div className="savings-text">You save 29%</div>
                   <ul className="plan-features">
-                    <li>300 Keyword Credits</li>
+                    <li>500 Keyword Credits</li>
                     <li>High-quality AI generation</li>
                     <li>WordPress ready format</li>
                     <li>Priority support</li>
                   </ul>
                   <button 
                     className="plan-button"
-                    onClick={() => handlePurchasePlan('blogger', 100)}
+                    onClick={() => handlePurchasePlan('blogger', 500)}
                     disabled={isProcessingPayment}
                   >
                     {isProcessingPayment ? 'Processing...' : 'Choose Plan'}
@@ -1043,7 +1043,7 @@ function App() {
                   <div className="plan-price">$99.99</div>
                   <div className="savings-text">You save 46%</div>
                   <ul className="plan-features">
-                    <li>750 Keyword Credits</li>
+                    <li>1200 Keyword Credits</li>
                     <li>High-quality AI generation</li>
                     <li>WordPress ready format</li>
                     <li>Priority support</li>
@@ -1051,7 +1051,7 @@ function App() {
                   </ul>
                   <button 
                     className="plan-button"
-                    onClick={() => handlePurchasePlan('pro', 240)}
+                    onClick={() => handlePurchasePlan('pro', 1200)}
                     disabled={isProcessingPayment}
                   >
                     {isProcessingPayment ? 'Processing...' : 'Choose Plan'}

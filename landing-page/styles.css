@@ -2051,7 +2051,7 @@ body {
 /* ===== UPDATED SAVINGS TEXT ===== */
 .savings-text {
     color: var(--success);
-    font-size: 1rem !important;
+    font-size: 20px !important;
     font-weight: 700 !important;
     margin-top: 8px;
     margin-bottom: 16px;
