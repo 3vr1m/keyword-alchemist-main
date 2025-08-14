@@ -80,7 +80,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
     setError('');
 
     try {
-      const response = await fetch('http://23.88.106.121:3002/api/admin/dashboard', {
+      const response = await fetch('/api/admin/dashboard', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
@@ -107,7 +107,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onClose }) => {
     
     setIsLoading(true);
     try {
-      const response = await fetch('http://23.88.106.121:3002/api/admin/dashboard', {
+      const response = await fetch('/api/admin/dashboard', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
