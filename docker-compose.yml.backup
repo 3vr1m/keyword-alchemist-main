@@ -20,13 +20,10 @@ services:
     restart: unless-stopped
     networks:
       - keyword-alchemist-network
-    env_file:
-      - .env.docker
     environment:
       - NODE_ENV=production
       - PORT=3002
       - GEMINI_API_KEY=AIzaSyDY2uU3oWKPiT40d7g4CAQBlqbWmKueJGc
-      - FRONTEND_URL=https://keywordalchemist.com
     volumes:
       - ./backend/credit_system.db:/app/credit_system.db
 

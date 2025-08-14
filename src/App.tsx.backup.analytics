@@ -846,6 +846,8 @@ function App() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
 
         {/* Admin Link - Bottom of Sidebar */}
         <div style={{ marginTop: "auto", paddingTop: "20px", textAlign: "center" }}>
@@ -861,9 +863,6 @@ function App() {
             System Analytics
           </span>
         </div>
-        </div>
-      </div>
-
       
       {/* Main Content */}
       <div className="main-content">
