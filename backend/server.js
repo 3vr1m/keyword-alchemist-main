@@ -342,7 +342,7 @@ app.post('/api/stripe/create-checkout-session', async (req, res) => {
     
     // Define pricing based on plan type with correct credits display
     const prices = {
-      basic: { amount: 599, name: `Basic Plan - ${credits || 60} Credits`, credits: credits || 60 },
+      basic: { amount: 599, name: `Basic Plan - ${credits || 50} Credits`, credits: credits || 50 },
       blogger: { amount: 4999, name: `Blogger Plan - ${credits || 500} Credits`, credits: credits || 500 },
       pro: { amount: 9999, name: `Pro/Agency Plan - ${credits || 1200} Credits`, credits: credits || 1200 }
     };

@@ -995,14 +995,14 @@ function App() {
                   <p className="plan-description">Perfect for getting started and testing the waters.</p>
                   <div className="plan-price">$5.99</div>
                   <ul className="plan-features">
-                    <li>60 Keyword Credits</li>
+                    <li>50 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple formats: WordPress, Shopify, Ghost, Medium, HTML</li>
-                    <li>Community support</li>
+                    <li>Multiple blog formats supported</li>
+                    <li>Email support</li>
                   </ul>
                   <button 
                     className="plan-button"
-                    onClick={() => handlePurchasePlan('basic', 10)}
+                    onClick={() => handlePurchasePlan('basic', 50)}
                     disabled={isProcessingPayment}
                   >
                     {isProcessingPayment ? 'Processing...' : 'Get Started'}
@@ -1016,18 +1016,17 @@ function App() {
                   <div className="plan-price">$49.99</div>
                   <div style={{ background: 'var(--success-color)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: '600', marginBottom: '20px', display: 'inline-block' }}>
                     Most Popular
-                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Most Popular Choice\                  </div>
+                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 17% + Priority\                  </div>
                   </div>
                   <ul className="plan-features">
                     <li>500 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple formats: WordPress, Shopify, Ghost, Medium, HTML</li>
-                    <li>Email support + Priority response</li>
-                    <li>White-glove onboarding</li>
+                    <li>Multiple blog formats supported</li>
+                    <li>Priority email support</li>
                   </ul>
                   <button 
                     className="plan-button"
-                    onClick={() => handlePurchasePlan('blogger', 100)}
+                    onClick={() => handlePurchasePlan('blogger', 500)}
                     disabled={isProcessingPayment}
                   >
                     {isProcessingPayment ? 'Processing...' : 'Choose Plan'}
@@ -1041,19 +1040,17 @@ function App() {
                   <div className="plan-price">$99.99</div>
                   <div style={{ background: 'var(--success-color)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: '600', marginBottom: '20px', display: 'inline-block' }}>
                     Best Value
-                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 17% per credit + Priority\                  </div>
+                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 30% + Priority\                  </div>
                   </div>
                   <ul className="plan-features">
                     <li>1200 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple formats: WordPress, Shopify, Ghost, Medium, HTML</li>
-                    <li>Email support + Priority response</li>
-                    <li>White-glove onboarding</li>
-                    <li>Custom integrations</li>
+                    <li>Multiple blog formats supported</li>
+                    <li>Priority email support</li>
                   </ul>
                   <button 
                     className="plan-button"
-                    onClick={() => handlePurchasePlan('pro', 240)}
+                    onClick={() => handlePurchasePlan('pro', 1200)}
                     disabled={isProcessingPayment}
                   >
                     {isProcessingPayment ? 'Processing...' : 'Choose Plan'}
