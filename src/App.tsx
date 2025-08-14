@@ -280,20 +280,6 @@ function App() {
   const [copiedArticleId, setCopiedArticleId] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Manage body scroll lock when mobile sidebar is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.classList.add("sidebar-open");
-    } else {
-      document.body.classList.remove("sidebar-open");
-    }
-    
-    // Cleanup on unmount
-    return () => {
-      document.body.classList.remove("sidebar-open");
-    };
-  }, [isMobileMenuOpen]);
-
   // Credit system state
   const [accessKey, setAccessKey] = useState("");
   const [creditInfo, setCreditInfo] = useState<CreditInfo | null>(null);
@@ -995,10 +981,9 @@ function App() {
                   <p className="plan-description">Perfect for getting started and testing the waters.</p>
                   <div className="plan-price">$5.99</div>
                   <ul className="plan-features">
-                    <li>50 Keyword Credits</li>
+                    <li>25 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple blog formats supported</li>
-                    <li>Email support</li>
+                    <li>WordPress ready format</li>
                   </ul>
                   <button 
                     className="plan-button"
@@ -1016,17 +1001,17 @@ function App() {
                   <div className="plan-price">$49.99</div>
                   <div style={{ background: 'var(--success-color)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: '600', marginBottom: '20px', display: 'inline-block' }}>
                     Most Popular
-                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 17% + Priority\                  </div>
+                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 29% vs Basic per credit\                  </div>
                   </div>
                   <ul className="plan-features">
-                    <li>500 Keyword Credits</li>
+                    <li>300 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple blog formats supported</li>
-                    <li>Priority email support</li>
+                    <li>WordPress ready format</li>
+                    <li>Priority support</li>
                   </ul>
                   <button 
                     className="plan-button"
-                    onClick={() => handlePurchasePlan('blogger', 500)}
+                    onClick={() => handlePurchasePlan('blogger', 100)}
                     disabled={isProcessingPayment}
                   >
                     {isProcessingPayment ? 'Processing...' : 'Choose Plan'}
@@ -1040,17 +1025,18 @@ function App() {
                   <div className="plan-price">$99.99</div>
                   <div style={{ background: 'var(--success-color)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: '600', marginBottom: '20px', display: 'inline-block' }}>
                     Best Value
-                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 30% + Priority\                  </div>
+                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 46% vs Basic per credit\                  </div>
                   </div>
                   <ul className="plan-features">
-                    <li>1200 Keyword Credits</li>
+                    <li>750 Keyword Credits</li>
                     <li>High-quality AI generation</li>
-                    <li>Multiple blog formats supported</li>
-                    <li>Priority email support</li>
+                    <li>WordPress ready format</li>
+                    <li>Priority support</li>
+                    <li>Custom integrations</li>
                   </ul>
                   <button 
                     className="plan-button"
-                    onClick={() => handlePurchasePlan('pro', 1200)}
+                    onClick={() => handlePurchasePlan('pro', 240)}
                     disabled={isProcessingPayment}
                   >
                     {isProcessingPayment ? 'Processing...' : 'Choose Plan'}
