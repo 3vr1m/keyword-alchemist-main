@@ -276,8 +276,6 @@ function App() {
   const [keywords, setKeywords] = useState<Keyword[]>([]);
   const [articles, setArticles] = useState<Article[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [apiKey, setApiKey] = useState('');
-  const [showApiKeyInput, setShowApiKeyInput] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [copiedArticleId, setCopiedArticleId] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -304,19 +302,6 @@ function App() {
       setTheme(savedTheme);
     }
     
-    // Check environment variable first, then localStorage
-    const envApiKey = process.env.REACT_APP_GEMINI_API_KEY;
-    const savedApiKey = localStorage.getItem('geminiApiKey');
-    
-    if (envApiKey) {
-      setApiKey(envApiKey);
-      geminiService.setApiKey(envApiKey);
-    } else if (savedApiKey) {
-      setApiKey(savedApiKey);
-      geminiService.setApiKey(savedApiKey);
-    } else {
-      setShowApiKeyInput(true);
-    }
 
     // Handle payment success
     const urlParams = new URLSearchParams(window.location.search);
@@ -339,15 +324,6 @@ function App() {
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
-  };
-
-  const handleApiKeySubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (apiKey.trim()) {
-      localStorage.setItem('geminiApiKey', apiKey.trim());
-      geminiService.setApiKey(apiKey.trim());
-      setShowApiKeyInput(false);
-    }
   };
 
   const handleFileUpload = async (file: File) => {
@@ -675,57 +651,6 @@ function App() {
     setKeywords([]);
     setArticles([]);
   };
-
-  if (showApiKeyInput) {
-    return (
-      <div className="app">
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', padding: '20px' }}>
-          <div style={{ maxWidth: '400px', width: '100%' }}>
-            <h2 style={{ textAlign: 'center', marginBottom: '20px', color: 'var(--text-primary)' }}>Configure Gemini API</h2>
-            <p style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-secondary)' }}>Please enter your Google Gemini API key to get started.</p>
-            <form onSubmit={handleApiKeySubmit}>
-              <input
-                type="password"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Enter your Gemini API key..."
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  marginBottom: '20px',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  background: 'var(--bg-primary)',
-                  color: 'var(--text-primary)',
-                  fontSize: '16px'
-                }}
-                required
-              />
-              <button
-                type="submit"
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  background: 'var(--accent-primary)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  fontSize: '16px',
-                  fontWeight: '600',
-                  cursor: 'pointer'
-                }}
-              >
-                Save API Key
-              </button>
-            </form>
-            <p style={{ fontSize: '14px', color: 'var(--text-muted)', textAlign: 'center', marginTop: '20px' }}>
-              Get your API key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-primary)' }}>Google AI Studio</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="app">
