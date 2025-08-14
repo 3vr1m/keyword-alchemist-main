@@ -271,6 +271,27 @@ function ArticleTabView({
 }
 
 function App() {
+  // Hash routing for URL tracking
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash === "pricing") {
+        setCurrentView("pricing");
+      } else if (hash === "articles") {
+        setCurrentView("articles");
+      }
+    };
+    
+    // Check initial hash
+    handleHashChange();
+    
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+    
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
   const [theme, setTheme] = useState<Theme>('light');
   const [currentView, setCurrentView] = useState<CurrentView>('articles');
   const [keywords, setKeywords] = useState<Keyword[]>([]);
@@ -871,14 +892,14 @@ function App() {
           <div className="nav-buttons">
             <button 
               className={`nav-button ${currentView === 'articles' ? 'active' : ''}`}
-              onClick={() => setCurrentView('articles')}
+              onClick={() => { setCurrentView("articles"); window.location.hash = "articles"; }}
             >
               <FileText size={16} />
               Articles
             </button>
             <button 
               className={`nav-button ${currentView === 'pricing' ? 'active' : ''}`}
-              onClick={() => setCurrentView('pricing')}
+              onClick={() => { setCurrentView("pricing"); window.location.hash = "pricing"; }}
             >
               <DollarSign size={16} />
               Pricing
