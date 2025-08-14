@@ -846,10 +846,9 @@ function App() {
               </div>
             ))}
           </div>
-        </div>
 
-        {/* System Analytics - Bottom of Sidebar */}
-        <div className="dash-analytics" style={{ marginTop: "auto", paddingTop: "20px", textAlign: "center" }}>
+        {/* Admin Link - Bottom of Sidebar */}
+        <div style={{ marginTop: "auto", paddingTop: "20px", textAlign: "center" }}>
           <span 
             onClick={() => setCurrentView("admin")}
             style={{
@@ -861,6 +860,7 @@ function App() {
           >
             System Analytics
           </span>
+        </div>
         </div>
       </div>
 
