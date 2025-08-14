@@ -2057,3 +2057,33 @@ body {
     margin-bottom: 16px;
     display: block;
 }
+
+/* ===== ROTATING DEMO STYLES ===== */
+#rotating-demo {
+    position: relative;
+    height: 100%;
+}
+
+.demo-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    pointer-events: none;
+}
+
+.demo-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.demo-slide.fade-out {
+    opacity: 0;
+}
+
+.demo-slide.fade-in {
+    opacity: 1;
+}

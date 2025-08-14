@@ -621,3 +621,33 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.addEventListener('show', () => trapFocus(modal));
     });
 });
+
+// ===== ROTATING DEMO FUNCTIONALITY =====
+document.addEventListener('DOMContentLoaded', function() {
+    const demoContainer = document.getElementById('rotating-demo');
+    if (!demoContainer) return;
+    
+    const slides = demoContainer.querySelectorAll('.demo-slide');
+    let currentSlide = 0;
+    const rotationInterval = 4000; // 4 seconds per slide
+    
+    function showSlide(index) {
+        // Remove active class from all slides
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        // Add active class to current slide
+        slides[index].classList.add('active');
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+    
+    // Start the rotation
+    if (slides.length > 1) {
+        setInterval(nextSlide, rotationInterval);
+    }
+});
