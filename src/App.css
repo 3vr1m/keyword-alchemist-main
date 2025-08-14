@@ -1019,3 +1019,11 @@ body {
     position: fixed;
     width: 100%;
   }
+
+.savings-text {
+  color: #ff8c00;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}

@@ -999,10 +999,7 @@ function App() {
                   <h3 className="plan-name">Blogger</h3>
                   <p className="plan-description">Ideal for serious bloggers and content creators.</p>
                   <div className="plan-price">$49.99</div>
-                  <div style={{ background: 'var(--success-color)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: '600', marginBottom: '20px', display: 'inline-block' }}>
-                    Most Popular
-                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 29% vs Basic per credit\                  </div>
-                  </div>
+                  <div className="savings-text">You save 29%</div>
                   <ul className="plan-features">
                     <li>300 Keyword Credits</li>
                     <li>High-quality AI generation</li>
@@ -1023,10 +1020,7 @@ function App() {
                   <h3 className="plan-name">Pro / Agency</h3>
                   <p className="plan-description">For agencies and high-volume content operations.</p>
                   <div className="plan-price">$99.99</div>
-                  <div style={{ background: 'var(--success-color)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '14px', fontWeight: '600', marginBottom: '20px', display: 'inline-block' }}>
-                    Best Value
-                  <div style={{ color: "var(--success-color)", fontSize: "14px", fontWeight: "600", marginBottom: "10px" }}>\                    Save 46% vs Basic per credit\                  </div>
-                  </div>
+                  <div className="savings-text">You save 46%</div>
                   <ul className="plan-features">
                     <li>750 Keyword Credits</li>
                     <li>High-quality AI generation</li>
