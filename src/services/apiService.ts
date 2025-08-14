@@ -1,0 +1,108 @@
+import axios from 'axios';
+
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://23.88.106.121:3002/api';
+
+class ApiService {
+  private api;
+
+  constructor() {
+    this.api = axios.create({
+      baseURL: API_BASE_URL,
+      timeout: 120000, // 2 minutes - fuck the short timeouts!
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // Add request interceptor for debugging
+    this.api.interceptors.request.use(request => {
+      console.log('API Request:', request.method?.toUpperCase() || "UNKNOWN", request.url);
+      return request;
+    });
+
+    // Add response interceptor for error handling
+    this.api.interceptors.response.use(
+      response => response,
+      error => {
+        console.error('API Error:', {
+          status: error.response?.status,
+          data: error.response?.data,
+          message: error.message,
+          code: error.code
+        });
+        return Promise.reject(error);
+      }
+    );
+  }
+
+  async validateAccessKey(accessKey: string) {
+    const response = await this.api.post('/auth/validate', { accessKey });
+    return response.data;
+  }
+
+  async processKeywords(accessKey: string, keywords: string[], format = 'wordpress') {
+    const response = await this.api.post('/keywords/process', {
+      accessKey,
+      format,
+      keywords: keywords.map(k => typeof k === 'string' ? k : (k as any).text)
+    });
+    return response.data;
+  }
+
+  async healthCheck() {
+    const response = await this.api.get('/health');
+    return response.data;
+  }
+
+  // Fixed Stripe integration methods
+  async createStripeCheckout(planType: string, credits: number) {
+    const response = await this.api.post('/stripe/create-checkout-session', {
+      planType,
+      credits
+    });
+    return response.data;
+  }
+
+  async verifyStripeSession(sessionId: string) {
+    const response = await this.api.post('/stripe/verify-session', {
+      sessionId
+    });
+    return response.data;
+  }
+
+  // Legacy method names for backward compatibility
+  async createStripeCheckout_old(plan: string, email: string) {
+    // Map old plan names to new format
+    const planMap = {
+      'basic': { planType: 'basic', credits: 1000 },
+      'pro': { planType: 'pro', credits: 5000 },
+      'enterprise': { planType: 'enterprise', credits: 15000 }
+    };
+    
+    const planConfig = planMap[plan as keyof typeof planMap] || { planType: 'basic', credits: 1000 };
+    return this.createStripeCheckout(planConfig.planType, planConfig.credits);
+  }
+
+  async verifyPayment(sessionId: string) {
+    return this.verifyStripeSession(sessionId);
+  }
+
+  // Create access key from successful payment
+  async createAccessKeyFromPayment(paymentData: {
+    sessionId: string;
+    planType: string;
+    credits: number;
+    amountPaid: number;
+  }) {
+    const response = await this.api.post("/stripe/create-access-key", paymentData);
+    return response.data;
+  }
+
+  // Legacy verifyPayment method
+  async verifyPayment_old(sessionId: string) {
+    return this.verifyStripeSession(sessionId);
+  }
+}
+
+const apiService = new ApiService();
+export default apiService;

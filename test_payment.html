@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Test</title>
+</head>
+<body>
+    <h2>Test Payment Integration</h2>
+    
+    <button onclick="testPayment('basic', 1000)">Test Basic Plan</button>
+    <button onclick="testPayment('pro', 5000)">Test Pro Plan</button>
+    <button onclick="testPayment('enterprise', 15000)">Test Enterprise Plan</button>
+    
+    <div id="result"></div>
+
+    <script>
+        async function testPayment(planType, credits) {
+            document.getElementById('result').innerText = 'Processing...';
+            
+            try {
+                const response = await fetch('http://23.88.106.121:3002/api/stripe/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        planType: planType,
+                        credits: credits
+                    }),
+                });
+
+                const data = await response.json();
+                
+                if (data.url) {
+                    document.getElementById('result').innerHTML = 
+                        `Success! Session ID: ${data.sessionId}<br>` +
+                        `<a href="${data.url}" target="_blank">Open Stripe Checkout</a>`;
+                    
+                    // Uncomment the line below to auto-redirect
+                    // window.open(data.url, '_blank');
+                } else {
+                    document.getElementById('result').innerText = 'Error: No checkout URL received';
+                }
+            } catch (error) {
+                document.getElementById('result').innerText = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
