@@ -532,7 +532,6 @@ body {
 /* Floating badges */
 .floating-badge {
     position: absolute;
-    z-index: 10;
     background: var(--white);
     border-radius: var(--radius-lg);
     padding: 10px 18px;
