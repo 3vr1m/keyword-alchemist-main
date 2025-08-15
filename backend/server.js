@@ -15,6 +15,8 @@ app.use(helmet());
 app.use(cors({
   origin: [
     process.env.FRONTEND_URL || 'http://localhost:3000',
+    'https://keywordalchemist.com',
+    'http://keywordalchemist.com',
     'http://23.88.106.121:3001',
     'http://localhost:3001'
   ],
@@ -365,8 +367,8 @@ app.post('/api/stripe/create-checkout-session', async (req, res) => {
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: `http://23.88.106.121:3001/dashboard?payment=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `http://23.88.106.121:3001/pricing?payment=cancelled`,
+      success_url: `https://keywordalchemist.com/?payment=success&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://keywordalchemist.com/#pricing?payment=cancelled`,
       metadata: {
         planType,
         credits: prices[planType].credits.toString(),
