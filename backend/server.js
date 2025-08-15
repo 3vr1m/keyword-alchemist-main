@@ -149,18 +149,48 @@ Output the result as a single, valid JSON object with the following structure:
             
             console.log(`[AI] Generated content for ${keyword} (Option ${version}), parsing...`);
             
-            // Parse the JSON response
+            // Parse the JSON response with better error handling
             let cleanedText = text.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+            
+            // Remove common formatting issues
+            cleanedText = cleanedText.replace(/\n/g, ' ').replace(/\r/g, '').replace(/\t/g, ' ');
+            cleanedText = cleanedText.replace(/\s+/g, ' ').trim();
             
             // If that doesn't work, try to find JSON within the text
             if (!cleanedText.startsWith('{')) {
               const jsonMatch = text.match(/\{[\s\S]*\}/);
               if (jsonMatch) {
                 cleanedText = jsonMatch[0];
+                // Clean the matched JSON too
+                cleanedText = cleanedText.replace(/\n/g, ' ').replace(/\r/g, '').replace(/\t/g, ' ');
+                cleanedText = cleanedText.replace(/\s+/g, ' ').trim();
               }
             }
             
-            const articleData = JSON.parse(cleanedText);
+            let articleData;
+            try {
+              articleData = JSON.parse(cleanedText);
+            } catch (parseError) {
+              console.error('[AI] JSON Parse Error:', parseError.message);
+              console.error('[AI] Raw text length:', text.length);
+              console.error('[AI] Cleaned text preview:', cleanedText.substring(0, 200) + '...');
+              
+              // Try to extract JSON manually as last resort
+              const titleMatch = text.match(/"title"\s*:\s*"([^"]*?)"/);
+              const tldrMatch = text.match(/"tldr"\s*:\s*"([^"]*?)"/);
+              const bodyMatch = text.match(/"body"\s*:\s*"([^"]*?)"/);
+              
+              if (titleMatch && tldrMatch && bodyMatch) {
+                articleData = {
+                  title: titleMatch[1],
+                  tldr: tldrMatch[1], 
+                  body: bodyMatch[1].replace(/\\n/g, '\n').replace(/\\"/g, '"')
+                };
+                console.log('[AI] Recovered JSON manually');
+              } else {
+                throw new Error(`Failed to parse JSON: ${parseError.message}`);
+              }
+            }
             
             // Validate the response structure
             if (!articleData.title || !articleData.tldr || !articleData.body) {

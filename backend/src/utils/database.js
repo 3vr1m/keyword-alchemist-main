@@ -121,14 +121,14 @@ class DatabaseManager {
   }
 
   // Create new access key
-  createAccessKey(key, plan, credits, email = null) {
+  createAccessKey(key, plan, credits, email = null, excludeFromAnalytics = false) {
     try {
       const stmt = this.db.prepare(`
-        INSERT INTO access_keys (key, credits_total, plan, email)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO access_keys (key, credits_total, plan, email, exclude_from_analytics)
+        VALUES (?, ?, ?, ?, ?)
       `);
       
-      const result = stmt.run(key, credits, plan, email);
+      const result = stmt.run(key, credits, plan, email, excludeFromAnalytics ? 1 : 0);
       return Promise.resolve({ key, credits, plan });
     } catch (error) {
       return Promise.reject(error);
@@ -224,51 +224,57 @@ class DatabaseManager {
   getAdminAnalytics() {
     try {
       // Total stats
-      const totalKeys = this.db.prepare('SELECT COUNT(*) as count FROM access_keys').get().count;
-      const totalRequests = this.db.prepare('SELECT COUNT(*) as count FROM usage_logs').get().count;
-      const totalKeywordAttempts = this.db.prepare('SELECT COUNT(*) as count FROM keyword_analytics').get().count;
+      const totalKeys = this.db.prepare('SELECT COUNT(*) as count FROM access_keys WHERE COALESCE(exclude_from_analytics, 0) = 0').get().count;
+      const totalRequests = this.db.prepare('SELECT COUNT(*) as count FROM usage_logs ul JOIN access_keys ak ON ul.access_key = ak.key WHERE COALESCE(ak.exclude_from_analytics, 0) = 0').get().count;
+      const totalKeywordAttempts = this.db.prepare('SELECT COUNT(*) as count FROM keyword_analytics ka JOIN access_keys ak ON ka.access_key = ak.key WHERE COALESCE(ak.exclude_from_analytics, 0) = 0').get().count;
       const successfulKeywords = this.db.prepare('SELECT COUNT(*) as count FROM keyword_analytics WHERE status = \'success\'').get().count;
       const failedKeywords = this.db.prepare('SELECT COUNT(*) as count FROM keyword_analytics WHERE status = \'failed\'').get().count;
       
       // API call counts and cost estimation
-      const totalCreditsUsed = this.db.prepare('SELECT COALESCE(SUM(credits_deducted), 0) as total FROM usage_logs').get().total;
-      const totalEstimatedCost = this.db.prepare('SELECT COALESCE(SUM(estimated_cost_usd), 0) as total FROM usage_logs').get().total +
-                                this.db.prepare('SELECT COALESCE(SUM(estimated_cost_usd), 0) as total FROM keyword_analytics').get().total;
+      const totalCreditsUsed = this.db.prepare('SELECT COALESCE(SUM(ul.credits_deducted), 0) as total FROM usage_logs ul JOIN access_keys ak ON ul.access_key = ak.key WHERE COALESCE(ak.exclude_from_analytics, 0) = 0').get().total;
+      const totalEstimatedCost = this.db.prepare('SELECT COALESCE(SUM(ul.estimated_cost_usd), 0) as total FROM usage_logs ul JOIN access_keys ak ON ul.access_key = ak.key WHERE COALESCE(ak.exclude_from_analytics, 0) = 0').get().total +
+                                this.db.prepare('SELECT COALESCE(SUM(ka.estimated_cost_usd), 0) as total FROM keyword_analytics ka JOIN access_keys ak ON ka.access_key = ak.key WHERE COALESCE(ak.exclude_from_analytics, 0) = 0').get().total;
       
       // Output format statistics
       const formatStats = this.db.prepare(`
-        SELECT output_format, COUNT(*) as count
-        FROM usage_logs
-        GROUP BY output_format
+        SELECT ul.output_format, COUNT(*) as count
+        FROM usage_logs ul
+        JOIN access_keys ak ON ul.access_key = ak.key
+        WHERE COALESCE(ak.exclude_from_analytics, 0) = 0
+        GROUP BY ul.output_format
         ORDER BY count DESC
       `).all();
       
       // Recent failures (last 48 hours)
       const recentFailures = this.db.prepare(`
-        SELECT keyword, approach, error_message, timestamp, access_key 
-        FROM keyword_analytics 
-        WHERE status = 'failed' AND timestamp > datetime('now', '-48 hours')
-        ORDER BY timestamp DESC
+        SELECT ka.keyword, ka.approach, ka.error_message, ka.timestamp, ka.access_key 
+        FROM keyword_analytics ka
+        JOIN access_keys ak ON ka.access_key = ak.key
+        WHERE ka.status = 'failed' AND ka.timestamp > datetime('now', '-48 hours') AND COALESCE(ak.exclude_from_analytics, 0) = 0
+        ORDER BY ka.timestamp DESC
         LIMIT 50
       `).all();
       
       // Most popular keywords
       const popularKeywords = this.db.prepare(`
-        SELECT keyword, COUNT(*) as usage_count, 
-               SUM(CASE WHEN status = 'success' THEN 1 ELSE 0 END) as success_count,
-               SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failure_count
-        FROM keyword_analytics 
-        GROUP BY keyword 
+        SELECT ka.keyword, COUNT(*) as usage_count, 
+               SUM(CASE WHEN ka.status = 'success' THEN 1 ELSE 0 END) as success_count,
+               SUM(CASE WHEN ka.status = 'failed' THEN 1 ELSE 0 END) as failure_count
+        FROM keyword_analytics ka
+        JOIN access_keys ak ON ka.access_key = ak.key
+        WHERE COALESCE(ak.exclude_from_analytics, 0) = 0
+        GROUP BY ka.keyword 
         ORDER BY usage_count DESC 
         LIMIT 20
       `).all();
       
       // Most used keywords (successful only)
       const mostUsedKeywords = this.db.prepare(`
-        SELECT keyword, COUNT(*) as usage_count
-        FROM keyword_analytics 
-        WHERE status = 'success'
-        GROUP BY keyword 
+        SELECT ka.keyword, COUNT(*) as usage_count
+        FROM keyword_analytics ka
+        JOIN access_keys ak ON ka.access_key = ak.key
+        WHERE ka.status = 'success' AND COALESCE(ak.exclude_from_analytics, 0) = 0
+        GROUP BY ka.keyword 
         ORDER BY usage_count DESC 
         LIMIT 15
       `).all();
@@ -276,25 +282,28 @@ class DatabaseManager {
       // Daily stats for the last 7 days
       const dailyStats = this.db.prepare(`
         SELECT 
-          DATE(timestamp) as date,
+          DATE(ka.timestamp) as date,
           COUNT(*) as total_attempts,
-          SUM(CASE WHEN status = 'success' THEN 1 ELSE 0 END) as successful,
-          SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed
-        FROM keyword_analytics 
-        WHERE timestamp > datetime('now', '-7 days')
-        GROUP BY DATE(timestamp)
+          SUM(CASE WHEN ka.status = 'success' THEN 1 ELSE 0 END) as successful,
+          SUM(CASE WHEN ka.status = 'failed' THEN 1 ELSE 0 END) as failed
+        FROM keyword_analytics ka
+        JOIN access_keys ak ON ka.access_key = ak.key
+        WHERE ka.timestamp > datetime('now', '-7 days') AND COALESCE(ak.exclude_from_analytics, 0) = 0
+        GROUP BY DATE(ka.timestamp)
         ORDER BY date DESC
       `).all();
       
       // Revenue and usage stats
       const revenueStats = this.db.prepare(`
         SELECT 
-          COUNT(DISTINCT access_key) as active_api_keys,
-          SUM(keywords_requested) as total_keywords_requested,
-          SUM(keywords_processed) as total_keywords_processed,
-          SUM(credits_deducted) as total_credits_consumed,
-          AVG(credits_deducted) as avg_credits_per_request
-        FROM usage_logs
+          COUNT(DISTINCT ul.access_key) as active_api_keys,
+          SUM(ul.keywords_requested) as total_keywords_requested,
+          SUM(ul.keywords_processed) as total_keywords_processed,
+          SUM(ul.credits_deducted) as total_credits_consumed,
+          AVG(ul.credits_deducted) as avg_credits_per_request
+        FROM usage_logs ul
+        JOIN access_keys ak ON ul.access_key = ak.key
+        WHERE COALESCE(ak.exclude_from_analytics, 0) = 0
       `).get();
       
       return Promise.resolve({

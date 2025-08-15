@@ -2091,3 +2091,10 @@ body {
 .demo-slide.fade-in {
     opacity: 1;
 }
+
+/* More specific selector for savings text in price notes */
+.price-note .savings-text {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: var(--success);
+}

@@ -2075,21 +2075,17 @@ body {
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 0.8s ease-in-out;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     pointer-events: none;
+    z-index: 1;
 }
 
 .demo-slide.active {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
-}
-
-.demo-slide.fade-out {
-    opacity: 0;
-}
-
-.demo-slide.fade-in {
-    opacity: 1;
+    z-index: 2;
 }
 
 /* More specific selector for savings text in price notes */
