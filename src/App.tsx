@@ -2,11 +2,15 @@ import apiService from './services/apiService';
 import React, { useState, useEffect, useRef } from 'react';
 import { Upload, Sparkles, FileText, DollarSign, Moon, Sun, Copy, CheckCircle, Menu, X } from 'lucide-react';
 import './App.css';
-import { Keyword, Article, Theme, CurrentView, CreditInfo } from './types';
+import { Keyword, Article, Theme, CurrentView, CreditInfo, CookieConsent, PolicyModalState } from './types';
 import { parseKeywordsFromFile, generateUniqueId, copyToClipboard, formatContent, readFileAsText, validateFileType } from './utils/fileUtils';
 import { markdownToHtml, getWordCount } from './utils/markdownUtils';
 import geminiService from './services/geminiService';
 import AdminDashboard from './components/AdminDashboard';
+import CookieBanner from './components/CookieBanner';
+import PolicyModal from './components/PolicyModal';
+import CookieSettings from './components/CookieSettings';
+import Footer from './components/Footer';
 
 // ArticleTabView Component for displaying multiple approaches in tabs
 interface ArticleTabViewProps {
@@ -314,6 +318,12 @@ function App() {
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
 
+  // EU Compliance state
+  const [cookieConsent, setCookieConsent] = useState<CookieConsent | null>(null);
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
+  const [policyModal, setPolicyModal] = useState<PolicyModalState>({ isOpen: false, type: null });
+  const [showCookieSettings, setShowCookieSettings] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Load theme and API key from localStorage on mount
@@ -321,6 +331,21 @@ function App() {
     const savedTheme = localStorage.getItem('theme') as Theme;
     if (savedTheme) {
       setTheme(savedTheme);
+    }
+
+    // Load cookie consent from localStorage
+    const savedCookieConsent = localStorage.getItem('cookieConsent');
+    if (savedCookieConsent) {
+      try {
+        const consent = JSON.parse(savedCookieConsent) as CookieConsent;
+        setCookieConsent(consent);
+        setShowCookieBanner(false);
+      } catch (error) {
+        console.error('Error parsing saved cookie consent:', error);
+        setShowCookieBanner(true);
+      }
+    } else {
+      setShowCookieBanner(true);
     }
     
 
@@ -673,6 +698,43 @@ function App() {
     setArticles([]);
   };
 
+  // Cookie consent handlers
+  const handleCookieAccept = (consent: CookieConsent) => {
+    setCookieConsent(consent);
+    setShowCookieBanner(false);
+    localStorage.setItem('cookieConsent', JSON.stringify(consent));
+  };
+
+  const handleCookieDecline = () => {
+    const minimalConsent: CookieConsent = {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      timestamp: Date.now()
+    };
+    setCookieConsent(minimalConsent);
+    setShowCookieBanner(false);
+    localStorage.setItem('cookieConsent', JSON.stringify(minimalConsent));
+  };
+
+  const handleCookieSettings = () => {
+    setShowCookieSettings(true);
+  };
+
+  const handleCookieSettingsSave = (consent: CookieConsent) => {
+    setCookieConsent(consent);
+    localStorage.setItem('cookieConsent', JSON.stringify(consent));
+  };
+
+  // Policy modal handlers
+  const handleOpenPolicy = (type: 'privacy' | 'terms' | 'cookies') => {
+    setPolicyModal({ isOpen: true, type });
+  };
+
+  const handleClosePolicy = () => {
+    setPolicyModal({ isOpen: false, type: null });
+  };
+
   return (
     <div className="app">
       {!isMobileMenuOpen && (
@@ -688,8 +750,10 @@ function App() {
       {/* Mobile Overlay */}
       <div className={`mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`} onClick={() => setIsMobileMenuOpen(false)} />
       
-      {/* Sidebar */}
-      <div className={`sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
+      {/* Main Layout Container */}
+      <div className="app-container">
+        {/* Sidebar */}
+        <div className={`sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <h1 className="app-title">Keyword Alchemist</h1>
           <p className="app-subtitle">Transform keywords into blog posts</p>
@@ -1090,6 +1154,33 @@ function App() {
           )}
         </div>
       </div>
+      </div> {/* End app-container */}
+      
+      {/* Footer - Outside main content */}
+      <Footer onOpenPolicy={handleOpenPolicy} />
+
+      {/* Cookie Banner */}
+      <CookieBanner
+        isVisible={showCookieBanner}
+        onAccept={handleCookieAccept}
+        onDecline={handleCookieDecline}
+        onSettings={handleCookieSettings}
+      />
+
+      {/* Policy Modal */}
+      <PolicyModal
+        isOpen={policyModal.isOpen}
+        type={policyModal.type}
+        onClose={handleClosePolicy}
+      />
+
+      {/* Cookie Settings Modal */}
+      <CookieSettings
+        isOpen={showCookieSettings}
+        currentConsent={cookieConsent}
+        onSave={handleCookieSettingsSave}
+        onClose={() => setShowCookieSettings(false)}
+      />
     </div>
   );
 }

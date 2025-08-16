@@ -1676,16 +1676,18 @@ body {
 
 /* ===== FOOTER ===== */
 .footer {
-    padding: 60px 0 30px 0;
+    padding: 20px 0;
     background: var(--gray-900);
     color: var(--gray-300);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .footer-logo {
@@ -2061,6 +2063,211 @@ body {
     margin-top: 8px;
     margin-bottom: 16px;
     display: block;
+}
+
+/* ===== NEW FOOTER STYLES FOR EU COMPLIANCE ===== */
+.footer-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.footer-link:hover {
+    color: white;
+}
+
+.footer-disclaimer {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    text-align: right;
+    line-height: 1.4;
+    flex: 1;
+}
+
+/* ===== POLICY MODAL STYLES ===== */
+.policy-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.policy-modal-content {
+    background: var(--white);
+    border-radius: 12px;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.policy-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.policy-modal-header h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0;
+}
+
+.policy-modal-close {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--gray-500);
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.policy-modal-close:hover {
+    background: var(--gray-100);
+    color: var(--gray-900);
+}
+
+.policy-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.policy-modal-body h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 20px 0 10px 0;
+}
+
+.policy-modal-body p {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+/* ===== COOKIE BANNER STYLES ===== */
+.cookie-banner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--gray-900);
+    color: var(--white);
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cookie-banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cookie-banner-content p {
+    flex: 1;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.cookie-banner-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.cookie-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cookie-btn.primary {
+    background: var(--orange);
+    color: var(--white);
+}
+
+.cookie-btn.primary:hover {
+    background: var(--orange-dark);
+}
+
+.cookie-btn.secondary {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cookie-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .footer-links {
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .footer-disclaimer {
+        text-align: center;
+    }
+    
+    .cookie-banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cookie-banner-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .policy-modal-content {
+        margin: 10px;
+        max-height: 90vh;
+    }
 }
 
 /* ===== ROTATING DEMO STYLES ===== */
