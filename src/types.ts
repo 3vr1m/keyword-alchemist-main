@@ -50,3 +50,16 @@ export interface ProcessResponse {
   allowedKeywords?: string[];
   rejectedKeywords?: string[];
 }
+
+// EU Compliance types
+export interface CookieConsent {
+  necessary: boolean;
+  analytics: boolean;
+  marketing: boolean;
+  timestamp: number;
+}
+
+export interface PolicyModalState {
+  isOpen: boolean;
+  type: 'privacy' | 'terms' | 'cookies' | null;
+}

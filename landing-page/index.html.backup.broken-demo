@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Alchemist - Transform Keywords into SEO Gold | AI Blog Post Generator</title>
+    <meta name="description" content="Turn your keywords into high-ranking blog posts that dominate page 1 of Google. AI-powered content that actually converts. Join 452+ content creators already ranking #1.">
+    <meta name="keywords" content="SEO blog generator, AI content creation, keyword to blog, first page Google, content marketing, blog automation">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://keywordalchemist.com">
+    <meta property="og:title" content="Keyword Alchemist - Transform Keywords into SEO Gold">
+    <meta property="og:description" content="Join 452+ content creators already ranking #1 on Google with AI-powered blog posts">
+    <meta property="og:image" content="https://keywordalchemist.com/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://keywordalchemist.com">
+    <meta property="twitter:title" content="Keyword Alchemist - Transform Keywords into SEO Gold">
+    <meta property="twitter:description" content="Join 452+ content creators already ranking #1 on Google with AI-powered blog posts">
+    <meta property="twitter:image" content="https://keywordalchemist.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- FOMO Banner -->
+    <div id="fomo-banner" class="fomo-banner">
+        <div class="fomo-content">
+            <span class="fomo-icon">🔥</span>
+            <span class="fomo-text">
+                <strong id="people-count">847</strong> people bought credits in the last 24 hours • 
+                <strong>Launch Promo:</strong> 100 blog posts for just <strong>$5.99</strong>!
+            </span>
+            <button class="fomo-close" onclick="closeFomoBanner()">&times;</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo" onclick="window.location.href='https://keywordalchemist.com'">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">Keyword Alchemist</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#testimonials">Reviews</a>
+                    <button class="btn btn-primary" onclick="window.location.href='https://keywordalchemist.com/#pricing'">Get Started</button>
+                </nav>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-content">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#testimonials">Reviews</a>
+            <button class="btn btn-primary" onclick="window.location.href='https://keywordalchemist.com/#pricing'">Get Started</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">🏆</span>
+                    <span>Used by <strong>452+</strong> content creators • One-time payment system</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Transform Your <span class="gradient-text">Keywords</span> into 
+                    <span class="gradient-text">Page 1 Rankings</span> in Minutes
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Stop struggling with blank pages. Our AI turns your keyword list into high-converting, 
+                    SEO-optimized blog posts that actually rank on Google's first page. 
+                    <strong>Launch Promo: Get 100 blog posts for just $5.99!</strong>
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">87%</span>
+                        <span class="stat-label">Hit Page 1</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2.3x</span>
+                        <span class="stat-label">More Traffic</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">80%</span>
+                        <span class="stat-label">Higher CTR</span>
+                    </div>
+                </div>
+                
+                <div class="hero-cta">
+                    <button class="btn btn-primary btn-large" onclick="window.location.href='https://keywordalchemist.com/#pricing'">
+                        <span class="btn-icon">🚀</span>
+                        Get 100 Blog Posts - Just $5.99
+                    </button>
+                    <p class="cta-note">
+                        <span class="security-icon">✅</span>
+                        One-time payment • Credits never expire • <strong>127 people</strong> started in the last hour
+                    </p>
+                </div>
+                
+                <div class="trust-badges">
+                    <span class="trust-item">✅ Google-Approved SEO</span>
+                    <span class="trust-item">✅ WordPress Ready</span>
+                    <span class="trust-item">✅ AI-Powered</span>
+                    <span class="trust-item">✅ Credits Never Expire</span>
+                </div>
+            </div>
+            
+            <!-- Hero Visual -->
+            <div class="hero-visual">
+                <div class="demo-container">
+                    <div class="demo-window">
+                        <div class="demo-header">
+                            <div class="demo-buttons">
+                                <span class="demo-btn red"></span>
+                                <span class="demo-btn yellow"></span>
+                                <span class="demo-btn green"></span>
+                            </div>
+                            <span class="demo-title">keywordalchemist.com</span>
+                        </div>
+                        <div class="demo-content" id="rotating-demo">
+                            <div class="demo-slide active" data-demo="1"><div class="search-result">
+                                <div class="search-bar">
+                                    <span class="search-icon">🔍</span>
+                                    <span>best coffee makers 2025</span>
+                                </div>
+                                <div class="search-results">
+                                    <div class="result-item featured">
+                                        <div class="result-badge">Generated by Keyword Alchemist</div>
+                                        <div class="result-title">15 Best Coffee Makers 2025: Complete Buyer's Guide</div>
+                                        <div class="result-url">yourblog.com/best-coffee-makers-2025</div>
+                                        <div class="result-snippet">Our comprehensive testing of 47 coffee makers reveals the top performers. From budget-friendly options to premium espresso machines...</div>
+                                        <div class="result-position">#1 Result</div>
+                                    </div>
+                                </div>
+                            
+                            <!-- Demo 2: Tech/SaaS -->
+                            <div class="demo-slide" data-demo="2">
+                                <div class="search-result">
+                                    <div class="search-bar">
+                                        <span class="search-icon">🔍</span>
+                                        <span>best project management tools 2025</span>
+                                    </div>
+                                    <div class="search-results">
+                                        <div class="result-item featured">
+                                            <div class="result-badge">Generated by Keyword Alchemist</div>
+                                            <div class="result-title">Top 12 Project Management Tools 2025: Expert Comparison</div>
+                                            <div class="result-url">techreview.com/project-management-tools-2025</div>
+                                            <div class="result-snippet">After testing 30+ PM tools, we reveal the best solutions for teams, startups, and enterprises. Features, pricing, and integrations compared...</div>
+                                            <div class="result-position">#1 Result</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Demo 3: Beauty/Skincare -->
+                            <div class="demo-slide" data-demo="3">
+                                <div class="search-result">
+                                    <div class="search-bar">
+                                        <span class="search-icon">🔍</span>
+                                        <span>anti aging skincare routine 2025</span>
+                                    </div>
+                                    <div class="search-results">
+                                        <div class="result-item featured">
+                                            <div class="result-badge">Generated by Keyword Alchemist</div>
+                                            <div class="result-title">Ultimate Anti-Aging Skincare Routine 2025: Dermatologist Guide</div>
+                                            <div class="result-url">beautyguide.com/anti-aging-routine-2025</div>
+                                            <div class="result-snippet">Dermatologist-approved steps and products for youthful skin. Science-backed ingredients, application order, and budget-friendly alternatives...</div>
+                                            <div class="result-position">#1 Result</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating elements -->
+                    <div class="floating-badge badge-1">
+                        <span class="badge-icon">📈</span>
+                        <div class="badge-content">
+                            <span class="badge-title">Organic Traffic</span>
+                            <span class="badge-value">+247%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-badge badge-2">
+                        <span class="badge-icon">🎯</span>
+                        <div class="badge-content">
+                            <span class="badge-title">Page 1 Rankings</span>
+                            <span class="badge-value">43/45</span>
+                        </div>
+                    </div>
+                    
+                    <div class="floating-badge badge-3">
+                        <span class="badge-icon">⚡</span>
+                        <div class="badge-content">
+                            <span class="badge-title">Generated in</span>
+                            <span class="badge-value">3.2 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    Everything You Need to <span class="gradient-text">Dominate Google</span>
+                </h2>
+                <p class="section-subtitle">
+                    From keyword to #1 ranking in minutes, not months. Here's how we make it happen.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">AI-Powered Content Generation</h3>
+                    <p class="feature-description">
+                        Advanced AI analyzes top-ranking content and creates unique, engaging posts that outrank the competition. 
+                        Generate up to 1200 optimized articles with our Pro plan.
+                    </p>
+                    <div class="feature-proof">
+                        <span class="proof-icon">📊</span>
+                        <span>87% of our posts hit page 1 within 30 days</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Bulk Processing Power</h3>
+                    <p class="feature-description">
+                        Upload 100+ keywords and watch as we transform them into a content empire. 
+                        What takes agencies months, we do in hours.
+                    </p>
+                    <div class="feature-proof">
+                        <span class="proof-icon">🚀</span>
+                        <span>Process 100+ keywords simultaneously</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card featured">
+                    <div class="feature-badge">Most Popular</div>
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">SEO Optimization Engine</h3>
+                    <p class="feature-description">
+                        Built-in SEO analyzer ensures perfect keyword density, meta tags, headers, and internal linking. 
+                        Every post is Google-ready.
+                    </p>
+                    <div class="feature-proof">
+                        <span class="proof-icon">🏆</span>
+                        <span>Average SEO score: 96/100</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3 class="feature-title">WordPress Integration</h3>
+                    <p class="feature-description">
+                        Copy and paste ready formatting for WordPress. Headers, formatting, and structure are automatically optimized. 
+                        Your blog goes from empty to empire overnight.
+                    </p>
+                    <div class="feature-proof">
+                        <span class="proof-icon">⚡</span>
+                        <span>Ready-to-publish format</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">One-Time Payment</h3>
+                    <p class="feature-description">
+                        No monthly subscriptions. Buy credits once, use them forever. 
+                        Credits never expire and you own them for life.
+                    </p>
+                    <div class="feature-proof">
+                        <span class="proof-icon">📊</span>
+                        <span>Credits never expire</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Instant Results</h3>
+                    <p class="feature-description">
+                        Generate professional, SEO-optimized articles in minutes. 
+                        No waiting, no delays - instant content creation.
+                    </p>
+                    <div class="feature-proof">
+                        <span class="proof-icon">⚡</span>
+                        <span>Articles ready in 3-5 minutes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    Choose Your <span class="gradient-text">Content Power</span>
+                </h2>
+                <p class="section-subtitle">
+                    One-time payment. Credits never expire. Start creating ranking content today.
+                </p>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Basic</h3>
+                        <p class="plan-description">Perfect for new bloggers</p>
+                        <div class="plan-price">
+                            <span class="price-currency">$</span>
+                            <span class="price-amount">5.99</span>
+                        </div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>50 keyword credits</li>
+                        <li>Up to 100 blog posts</li>
+                        <li>High-quality AI generation</li>
+                        <li>WordPress ready format</li>
+                        <li>SEO optimized content</li>
+                        <li>Credits never expire</li>
+                    </ul>
+                    <button class="plan-button" onclick="purchaseBasic()">
+                        Choose Basic Plan
+                    </button>
+                    <p class="plan-guarantee">One-time payment • Credits never expire</p>
+                </div>
+                
+                <!-- Blogger Plan (Most Popular) -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">🔥 Most Popular</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">Blogger</h3>
+                        <p class="plan-description">For serious content creators</p>
+                        <div class="plan-price">
+                            <span class="price-currency">$</span>
+                            <span class="price-amount">49.99</span>
+                        </div>
+                        <div class="price-note">
+                            <span class="savings-text">You save 16% vs Basic plan</span>
+                        </div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>500 keyword credits</li>
+                        <li>Up to 1,000 blog posts</li>
+                        <li>High-quality AI generation</li>
+                        <li>WordPress ready format</li>
+                        <li>SEO optimized content</li>
+                        <li>Priority support</li>
+                        <li>Credits never expire</li>
+                        <li>Bulk processing</li>
+                    </ul>
+                    <button class="plan-button primary" onclick="purchaseBlogger()">
+                        Choose Blogger Plan
+                    </button>
+                    <p class="plan-guarantee">One-time payment • Best value</p>
+                </div>
+                
+                <!-- Pro Plan -->
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Pro / Agency</h3>
+                        <p class="plan-description">For agencies and high-volume</p>
+                        <div class="plan-price">
+                            <span class="price-currency">$</span>
+                            <span class="price-amount">99.99</span>
+                        </div>
+                        <div class="price-note">
+                            <span class="savings-text">You save 30% vs Basic plan</span>
+                        </div>
+                    </div>
+                    <ul class="plan-features">
+                        <li>1200 keyword credits</li>
+                        <li>Up to 2,400 blog posts</li>
+                        <li>High-quality AI generation</li>
+                        <li>WordPress ready format</li>
+                        <li>SEO optimized content</li>
+                        <li>Priority support</li>
+                        <li>Custom integrations</li>
+                        <li>Credits never expire</li>
+                        <li>Bulk processing</li>
+                    </ul>
+                    <button class="plan-button" onclick="purchasePro()">
+                        Choose Pro Plan
+                    </button>
+                    <p class="plan-guarantee">One-time payment • Maximum value</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    Join 452+ Content Creators Already Winning
+                </h2>
+                <p class="section-subtitle">
+                    See what others are saying about their game-changing results
+                </p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Went from writing 1 post per week to publishing 50 SEO-optimized articles in a single day. My organic traffic exploded by 400% in just 2 months."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23c77447'/%3E%3Ctext x='50' y='58' text-anchor='middle' fill='white' font-size='32' font-family='Arial'%3EMJ%3C/text%3E%3C/svg%3E" alt="Mike Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Mike Johnson</h4>
+                            <p>Digital Marketing Agency Owner</p>
+                            <div class="author-stats">
+                                <span>400% traffic increase</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card featured">
+                    <div class="testimonial-badge">🏆 Success Story</div>
+                    <div class="testimonial-content">
+                        <p>"From zero to $10K monthly affiliate income in 4 months. My 'best laptops 2024' post alone generates $2,500/month. This tool is absolutely insane."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23c77447'/%3E%3Ctext x='50' y='58' text-anchor='middle' fill='white' font-size='32' font-family='Arial'%3EAR%3C/text%3E%3C/svg%3E" alt="Alex Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Alex Rodriguez</h4>
+                            <p>Affiliate Marketer</p>
+                            <div class="author-stats">
+                                <span>$10K monthly income</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I was skeptical about AI content, but these posts are indistinguishable from human writing. Better yet, 19 out of 20 posts hit page 1 within a month."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23c77447'/%3E%3Ctext x='50' y='58' text-anchor='middle' fill='white' font-size='32' font-family='Arial'%3ELW%3C/text%3E%3C/svg%3E" alt="Lisa Wang">
+                        </div>
+                        <div class="author-info">
+                            <h4>Lisa Wang</h4>
+                            <p>Tech Blog Founder</p>
+                            <div class="author-stats">
+                                <span>95% page 1 success rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Live activity feed -->
+            <div class="activity-feed">
+                <h3>Live Activity 🔴</h3>
+                <div class="activity-items">
+                    <div class="activity-item">
+                        <span class="activity-user">David K.</span>
+                        <span class="activity-text">just purchased 500 credits</span>
+                        <span class="activity-time">2 minutes ago</span>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-user">Maria S.</span>
+                        <span class="activity-text">reached #1 ranking for "best yoga mats"</span>
+                        <span class="activity-time">8 minutes ago</span>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-user">James L.</span>
+                        <span class="activity-text">generated 47 blog posts</span>
+                        <span class="activity-time">12 minutes ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">
+                    Start Creating Ranking Content Today
+                </h2>
+                <p class="cta-subtitle">
+                    Join 452+ creators who chose to dominate their niches with AI-powered content that actually ranks.
+                </p>
+                
+                <div class="cta-stats">
+                    <div class="cta-stat">
+                        <span class="stat-number">452+</span>
+                        <span class="stat-label">Success Stories</span>
+                    </div>
+                    <div class="cta-stat">
+                        <span class="stat-number">87%</span>
+                        <span class="stat-label">Hit Page 1</span>
+                    </div>
+                    <div class="cta-stat">
+                        <span class="stat-number">$5.99</span>
+                        <span class="stat-label">Starting Price</span>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large" onclick="window.location.href='https://keywordalchemist.com/#pricing'">
+                        <span class="btn-icon">🚀</span>
+                        Get Started - Only $5.99
+                    </button>
+                </div>
+                
+                <div class="cta-guarantees">
+                    <span class="guarantee">✅ One-time payment</span>
+                    <span class="guarantee">✅ Credits never expire</span>
+                    <span class="guarantee">✅ Instant access</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">Keyword Alchemist</span>
+                    </div>
+                    <p class="footer-tagline">Transform keywords into ranking content.</p>
+                </div>
+                
+                <div class="footer-contact">
+                    <a href="mailto:contact@keywordalchemist.com" class="contact-link">Contact</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Keyword Alchemist. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="purchase.js"></script>
+</body>
+</html>

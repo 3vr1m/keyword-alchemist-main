@@ -630,24 +630,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const slides = demoContainer.querySelectorAll('.demo-slide');
     let currentSlide = 0;
     const rotationInterval = 4000; // 4 seconds per slide
+    const transitionDuration = 300; // Must match CSS transition duration
+    
+    if (slides.length <= 1) return;
     
     function showSlide(index) {
+        // Ensure the index is within bounds
+        index = index % slides.length;
+        
         // Remove active class from all slides
-        slides.forEach(slide => {
-            slide.classList.remove('active');
+        slides.forEach((slide, i) => {
+            if (i === index) {
+                // Make the target slide visible
+                slide.classList.add('active');
+                slide.style.zIndex = '2';
+            } else {
+                // Hide other slides
+                slide.classList.remove('active');
+                slide.style.zIndex = '1';
+            }
         });
         
-        // Add active class to current slide
-        slides[index].classList.add('active');
+        currentSlide = index;
     }
     
     function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+        const nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
     }
     
+    // Initialize - ensure first slide is visible
+    showSlide(0);
+    
     // Start the rotation
-    if (slides.length > 1) {
-        setInterval(nextSlide, rotationInterval);
-    }
+    setInterval(nextSlide, rotationInterval);
+    
+    console.log('Demo rotation initialized with', slides.length, 'slides');
 });

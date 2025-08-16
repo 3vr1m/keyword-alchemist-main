@@ -543,19 +543,19 @@ body {
 
 .badge-1 {
     top: 20px;
-    left: -50px;
+    left: 20px;
     animation-delay: 0s;
 }
 
 .badge-2 {
     top: 120px;
-    right: -80px;
+    right: 20px;
     animation-delay: 1s;
 }
 
 .badge-3 {
     bottom: 40px;
-    left: -30px;
+    left: 40px;
     animation-delay: 2s;
 }
 
